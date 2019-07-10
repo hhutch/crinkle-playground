@@ -12,8 +12,9 @@
 (defn my-function-component [{:keys [foo-text] :as props}]
   ;; Return React Elements using any library (or not) you want.
   ;; Here's one way using Crinkle:
-  ;(RE "p" foo-text)
-  (d/div foo-text))
+  ;; (RE "p" {} foo-text)
+  ;; (RE :p {} foo-text)
+  (d/div {} foo-text))
 
 ;; Note: no wrappers or component factories! 
 (render
