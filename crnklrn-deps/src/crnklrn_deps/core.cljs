@@ -1,7 +1,8 @@
 (ns crnklrn-deps.core
   (:require [crinkle.component :refer [RE CE] :as c]
-              [crinkle.dom :as d]
-              [react-dom :refer [render]]))
+            [crinkle.dom :as d]
+            [react-dom :refer [render]]
+            [hicada.input :as h]))
 
 (enable-console-print!)
 
