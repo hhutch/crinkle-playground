@@ -8,13 +8,13 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defn my-function-component [{:keys [foo-text] :as props}]
+(defn my-function-component [{:keys [^string foo-text] :as props}]
   ;; Return React Elements using any library (or not) you want.
   ;; Here's one way using Crinkle:
   ;; (RE "p" {} foo-text)
   ;; (RE :p {} foo-text)
   (html
-    [:div ^:inline foo-text]))
+    [:div foo-text]))
 
 (defn start []
   (render
