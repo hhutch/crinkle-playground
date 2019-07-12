@@ -14,12 +14,14 @@
   ;; (RE "p" {} foo-text)
   ;; (RE :p {} foo-text)
   (html
-    [:div {} foo-text]))
+    [:div ^:inline foo-text]))
 
 (defn start []
   (render
-   (CE my-function-component {:foo-text "Hello to your momma an' dem!"})
-   (.. js/document (getElementById "app"))))
+    (html
+      [:div
+       [:CE my-function-component {:foo-text "Hello to your momma an' dem!"} :key  "test"]])
+    (.. js/document (getElementById "app"))))
 
 (defn ^:export init []
   ;; init is called ONCE when the page loads
