@@ -1,8 +1,8 @@
 (ns crnklrn-deps.core
   (:require [crinkle.component :refer [RE CE] :as c]
             [crinkle.dom :as d]
-            [react-dom :refer [render]]
-            [hicada.input :as h]))
+            ["react-dom" :refer [render]]
+            [crnklrn-deps.hiccup :refer [html]]))
 
 (enable-console-print!)
 
@@ -13,7 +13,8 @@
   ;; Here's one way using Crinkle:
   ;; (RE "p" {} foo-text)
   ;; (RE :p {} foo-text)
-  (d/div {} foo-text))
+  (html
+    [:div {} foo-text]))
 
 (defn start []
   (render
