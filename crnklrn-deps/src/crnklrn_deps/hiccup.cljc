@@ -14,11 +14,8 @@
         :rewrite-for?   true
         :emit-fn        (fn [tag attr children]
                           ;; Now handle the emitter case:
-                          (if (and (seq? tag) (= ::CE (first tag)))
-                            (let [[_ component props config] tag
-                                  _ (assert (even? (count config)))
-                                  {:keys [ref key]} (into {} (partition-all 2) config)]
-                              (list 'crinkle.component/create-element-raw-props component props  key ref))
+                          (if (and (seq? tag) (= 'crinkle.component/create-element-raw-props (first tag)))
+                            tag
                             (list* 'js/React.createElement tag attr children)))
         #_:interpret-or-inline-fn #_(fn [expr]
                                       (cond
@@ -27,5 +24,7 @@
                                           (.startsWith (name (first expr)) "*"))
                                         :inline))}
        {:CE (fn [_ klass attrs & children]
-              [(list ::CE klass attrs children)])})))
+              (assert (even? (count children)))
+              (let [{:keys [ref key]} (into {} (partition-all 2) children)]
+                [(list 'crinkle.component/create-element-raw-props klass attrs key ref)]))})))
 
