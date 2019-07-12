@@ -1,6 +1,6 @@
 (ns crnklrn-deps.core
-  (:require [crinkle.component :refer [RE CE] :as c]
-            [crinkle.dom :as d]
+  (:require                                                 ;[crinkle.component :refer [RE CE] :as c]
+    ;[crinkle.dom :as d]
             ["react-dom" :refer [render]]
             [crnklrn-deps.hiccup :refer [html]]))
 

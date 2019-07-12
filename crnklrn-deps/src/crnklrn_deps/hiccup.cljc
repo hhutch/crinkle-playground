@@ -18,7 +18,7 @@
                             (let [[_ component props config] tag
                                   _ (assert (even? (count config)))
                                   {:keys [ref key]} (into {} (partition-all 2) config)]
-                              (list 'c/create-element-raw-props component props  key ref))
+                              (list 'crinkle.component/create-element-raw-props component props  key ref))
                             (list* 'js/React.createElement tag attr children)))
         #_:interpret-or-inline-fn #_(fn [expr]
                                       (cond
