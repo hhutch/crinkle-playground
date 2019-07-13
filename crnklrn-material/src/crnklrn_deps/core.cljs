@@ -94,11 +94,9 @@
 
 
 (defn Dashboard [props]
-  (prn :hi)
   (let [classes          (useStyles)
         [open, setOpen] (useState true)
         handleDrawerOpen (useCallback (fn [e] (setOpen true)))]
-    (js/console.log theme)
     (html
       [:div {:className ^:inline (gobj/get classes "root")}
        [CssBaseline {}]
@@ -121,7 +119,7 @@
           {:component "h1"
            :variant   "h6"
            :color     "inherit"
-           ;:noWrap "noWrap"
+           :noWrap    true
            :className (gobj/get classes "title")}
           "Component"]
          [:> IconButton
@@ -138,8 +136,9 @@
     (html
       [:> ThemeProvider
        {:theme theme}
-       [:> Dashboard {}]])
+       [:CE Dashboard {}]])
     (.. js/document (getElementById "app"))))
+
 
 (defn ^:export init []
   ;; init is called ONCE when the page loads
