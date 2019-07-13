@@ -102,43 +102,43 @@
     (html
       [:div {:className ^:inline (gobj/get classes "root")}
        [CssBaseline {}]
-       [AppBar {:position  "absolute"
+       [:> AppBar {:position  "absolute"
                 :className (clsx (gobj/get classes "root")
                              (and open (gobj/get classes "appBarShift")))}
-        (html [Toolbar {:className (gobj/get classes "toolbar")}
-               #_(html [Button {:variant "contained" :color "primary"} "hello world"])
-               (html [IconButton
-                      {:edge       "start"
-                       :color      "inherit"
-                       :aria-label "Open drawer"
-                       :onClick    handleDrawerOpen
-                       :className  (clsx
-                                     (gobj/get classes "menuButton")
-                                     (and open
-                                       (gobj/get classes "menuButtonHidden")))}
-                      (html [MenuIcon {}])])
-               (html [Typography
-                      {:component "h1"
-                       :variant   "h6"
-                       :color     "inherit"
-                       ;:noWrap "noWrap"
-                       :className (gobj/get classes "title")}
-                      "Component"])
-               (html [IconButton
-                      {:color "inherit"}
-                      (html [Badge {:badgeContent 4
-                                    :color        "secondary"}
-                             (html [NotificationsIcon {}])])])
-               ])]
+        [:> Toolbar {:className (gobj/get classes "toolbar")}
+         #_(html [Button {:variant "contained" :color "primary"} "hello world"])
+         [:> IconButton
+          {:edge       "start"
+           :color      "inherit"
+           :aria-label "Open drawer"
+           :onClick    handleDrawerOpen
+           :className  (clsx
+                         (gobj/get classes "menuButton")
+                         (and open
+                           (gobj/get classes "menuButtonHidden")))}
+          [:> MenuIcon {}]]
+         [:> Typography
+          {:component "h1"
+           :variant   "h6"
+           :color     "inherit"
+           ;:noWrap "noWrap"
+           :className (gobj/get classes "title")}
+          "Component"]
+         [:> IconButton
+          {:color "inherit"}
+          [:> Badge {:badgeContent 4
+                     :color        "secondary"}
+           [:> NotificationsIcon {}]]]
+         ]]
        #_[Button {:variant "contained" :color "primary"} "hello world"]
        ])))
 
 (defn start []
   (render
     (html
-      [ThemeProvider
+      [:> ThemeProvider
        {:theme theme}
-       (html [Dashboard {}])])
+       [:> Dashboard {}]])
     (.. js/document (getElementById "app"))))
 
 (defn ^:export init []
