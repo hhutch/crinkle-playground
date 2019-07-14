@@ -8,6 +8,7 @@
     ["@material-ui/core/styles" :refer [makeStyles createMuiTheme responsiveFontSizes]]
     ["@material-ui/core/CssBaseline" :default CssBaseline]
     ["@material-ui/core/AppBar" :default AppBar]
+    ["@material-ui/core/Drawer" :default Drawer]
     ["@material-ui/core/Toolbar" :default Toolbar]
     ["@material-ui/core/List" :default List]
     ["@material-ui/core/Typography" :default Typography]
@@ -33,13 +34,14 @@
     (fn [theme]
       #js {:root             #js {:display "flex"}
            :toolbar          #js {:paddingRight 24}         ; keep right padding when drawer closed
-           :toolbarIcon      (gobj/extend
+           :toolbarIcon      (doto
                                #js {:display        "flex"
                                     :alignItems     "center"
                                     :justifyContent "flex-end"
                                     :padding        "0 8px"}
-                               (gobj/getValueByKeys
-                                 theme "mixins" "toolbar"))
+                               (gobj/extend
+                                 (gobj/getValueByKeys
+                                   theme "mixins" "toolbar")))
            :appBar           #js {:zIndex (+ (gobj/getValueByKeys theme "zIndex" "drawer") 1)
                                   :transition
                                           ((gobj/getValueByKeys theme "transitions" "create")
@@ -63,21 +65,20 @@
                                                "width"
                                                #js {:easing   (gobj/getValueByKeys theme "transitions" "easing" "sharp")
                                                     :duration (gobj/getValueByKeys theme "transitions" "duration" "enteringScreen")})}
-           :drawerPaperClose (gobj/set
+           :drawerPaperClose (doto
                                #js {:overflowX "hidden"
                                     :transition
                                                ((gobj/getValueByKeys theme "transitions" "create")
                                                 #js ["width" "margin"]
                                                 #js {:easing   (gobj/getValueByKeys theme "transitions" "easing" "sharp")
                                                      :duration (gobj/getValueByKeys theme "transitions" "duration" "leavingScreen")})
-                                    :width     ((gobj/getValueByKeys theme "spacing") 7)
-                                    }
-                               #js [((gobj/getValueByKeys
-                                       theme
-                                       "breakpoints"
-                                       "up")
-                                     "sm")]
-                               #js {:width ((gobj/getValueByKeys theme "spacing") 9)})
+                                    :width     ((gobj/getValueByKeys theme "spacing") 7)}
+                               (gobj/set #js [((gobj/getValueByKeys
+                                                 theme
+                                                 "breakpoints"
+                                                 "up")
+                                               "sm")]
+                                 #js {:width ((gobj/getValueByKeys theme "spacing") 9)}))
            :appBarSpacer     (gobj/getValueByKeys theme "mixins" "toolbar")
            :content          #js {:flexGrow 1
                                   :height   "100vh:"
@@ -95,11 +96,14 @@
 
 (defn Dashboard [props]
   (let [classes          (useStyles)
-        [open, setOpen] (useState true)
-        handleDrawerOpen (useCallback (fn [e] (setOpen true)))]
+        [open, setOpen] (useState false)
+        handleDrawerOpen (useCallback (fn [e] (setOpen true)))
+        handleDrawerClose (useCallback (fn [e] (setOpen false)))
+        fixedHeightPaper  (clsx (gobj/get classes "paper")
+                            (gobj/get classes "fixedHeight"))]
     (html
       [:div {:className ^:inline (gobj/get classes "root")}
-       [CssBaseline {}]
+       [:> CssBaseline {}]
        [:> AppBar {:position  "absolute"
                 :className (clsx (gobj/get classes "root")
                              (and open (gobj/get classes "appBarShift")))}
@@ -114,7 +118,7 @@
                          (gobj/get classes "menuButton")
                          (and open
                            (gobj/get classes "menuButtonHidden")))}
-          [:> MenuIcon {}]]
+          [:> MenuIcon {} "Blah"]]
          [:> Typography
           {:component "h1"
            :variant   "h6"
@@ -128,6 +132,39 @@
                      :color        "secondary"}
            [:> NotificationsIcon {}]]]
          ]]
+       [:>
+        Drawer
+        {:variant "permanent"
+         :classes {:paper
+                   (clsx
+                     (gobj/get classes "drawerPaper")
+                     (and (not open)
+                       (gobj/get classes "drawerPaperClose")))}
+         :open    open}
+        [:div {:className (gobj/get classes "toolbarIcon")}
+         [:> IconButton {:onClick handleDrawerClose}
+          [:> ChevronLeftIcon {}]]]
+        [:> Divider {}]
+        "hi"
+        #_[:List "{mainListItems}"]
+        [:> Divider {}]
+        #_[:List "{secondaryListItems}"]
+        ]
+       [:main {:className (gobj/get classes "content")}
+        [:div {:className (gobj/get classes "appBarSpacer")}]
+        [:> Container {:maxWidth "lg" :className (gobj/get classes "container")}
+         [:> Grid {:container true :spacing 3}              ; "{/* Chart */}"
+          [:> Grid {:item true :xs 12 :md 8 :lg 9}
+           [:> Paper {:className fixedHeightPaper}
+            "Chart" #_[:Chart]]]                                      ;"{/* Recent Deposits */}"
+          [:> Grid {:item true :xs 12 :md 4 :lg 3}
+           [:> Paper {:className fixedHeightPaper}
+            "Deposits" #_[:Deposits]]]                                   ;"{/* Recent Orders */}"
+          [:> Grid {:item true :xs 12}
+           [:> Paper {:className (gobj/get classes "paper")}
+            "Orders"
+            #_[:Orders]]]]]
+        #_[:MadeWithLove]]
        #_[Button {:variant "contained" :color "primary"} "hello world"]
        ])))
 
