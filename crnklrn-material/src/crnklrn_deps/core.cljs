@@ -81,7 +81,7 @@
                                  #js {:width ((gobj/getValueByKeys theme "spacing") 9)}))
            :appBarSpacer     (gobj/getValueByKeys theme "mixins" "toolbar")
            :content          #js {:flexGrow 1
-                                  :height   "100vh:"
+                                  :height   "100vh"
                                   :overflow "auto"}
            :container        #js {:paddingTop    ((gobj/getValueByKeys theme "spacing") 4)
                                   :paddingBottom ((gobj/getValueByKeys theme "spacing") 4)}
