@@ -49,7 +49,7 @@
                                            #js {:easing   (gobj/getValueByKeys theme "transitions" "easing" "sharp")
                                                 :duration (gobj/getValueByKeys theme "transitions" "duration" "leavingScreen")})}
            :appBarShift      #js {:marginLeft drawerWidth
-                                  :width      (str "calc(100% - " drawerWidth "px")
+                                  :width      (str "calc(100% - " drawerWidth "px)")
                                   :transition
                                               ((gobj/getValueByKeys theme "transitions" "create")
                                                #js ["width" "margin"]
@@ -105,8 +105,9 @@
       [:div {:className ^:inline (gobj/get classes "root")}
        [:> CssBaseline {}]
        [:> AppBar {:position  "absolute"
-                :className (clsx (gobj/get classes "root")
-                             (and open (gobj/get classes "appBarShift")))}
+                   :className (clsx (gobj/get classes "appBar")
+                                (and open
+                                  (gobj/get classes "appBarShift")))}
         [:> Toolbar {:className (gobj/get classes "toolbar")}
          #_(html [Button {:variant "contained" :color "primary"} "hello world"])
          [:> IconButton
@@ -156,10 +157,10 @@
          [:> Grid {:container true :spacing 3}              ; "{/* Chart */}"
           [:> Grid {:item true :xs 12 :md 8 :lg 9}
            [:> Paper {:className fixedHeightPaper}
-            "Chart" #_[:Chart]]]                                      ;"{/* Recent Deposits */}"
+            "Chart" #_[:Chart]]]                            ;"{/* Recent Deposits */}"
           [:> Grid {:item true :xs 12 :md 4 :lg 3}
            [:> Paper {:className fixedHeightPaper}
-            "Deposits" #_[:Deposits]]]                                   ;"{/* Recent Orders */}"
+            "Deposits" #_[:Deposits]]]                      ;"{/* Recent Orders */}"
           [:> Grid {:item true :xs 12}
            [:> Paper {:className (gobj/get classes "paper")}
             "Orders"
