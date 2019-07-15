@@ -26,5 +26,6 @@
        {:CE (fn [_ klass attrs & children]
               (assert (even? (count children)))
               (let [{:keys [ref key]} (into {} (partition-all 2) children)]
-                [(list 'crinkle.component/create-element-raw-props klass attrs key ref)]))})))
+                [(list 'crinkle.component/create-element-raw-props klass attrs key ref)]))}
+       &env)))
 
