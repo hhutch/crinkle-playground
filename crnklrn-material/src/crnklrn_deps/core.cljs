@@ -103,14 +103,14 @@
                             (gobj/get classes "fixedHeight"))]
     (html
       [:div {:className ^:inline (gobj/get classes "root")}
-       [:> CssBaseline {}]
-       [:> AppBar {:position  "absolute"
+       [CssBaseline {}]
+       [AppBar {:position  "absolute"
                    :className (clsx (gobj/get classes "appBar")
                                 (and open
                                   (gobj/get classes "appBarShift")))}
-        [:> Toolbar {:className (gobj/get classes "toolbar")}
+        [Toolbar {:className (gobj/get classes "toolbar")}
          #_(html [Button {:variant "contained" :color "primary"} "hello world"])
-         [:> IconButton
+         [IconButton
           {:edge       "start"
            :color      "inherit"
            :aria-label "Open drawer"
@@ -119,22 +119,21 @@
                          (gobj/get classes "menuButton")
                          (and open
                            (gobj/get classes "menuButtonHidden")))}
-          [:> MenuIcon {} "Blah"]]
-         [:> Typography
+          [MenuIcon {} "Blah"]]
+         [Typography
           {:component "h1"
            :variant   "h6"
            :color     "inherit"
            :noWrap    true
            :className (gobj/get classes "title")}
           "Component"]
-         [:> IconButton
+         [IconButton
           {:color "inherit"}
-          [:> Badge {:badgeContent 4
+          [Badge {:badgeContent 4
                      :color        "secondary"}
-           [:> NotificationsIcon {}]]]
+           [NotificationsIcon {}]]]
          ]]
-       [:>
-        Drawer
+       [Drawer
         {:variant "permanent"
          :classes {:paper
                    (clsx
@@ -143,26 +142,26 @@
                        (gobj/get classes "drawerPaperClose")))}
          :open    open}
         [:div {:className (gobj/get classes "toolbarIcon")}
-         [:> IconButton {:onClick handleDrawerClose}
-          [:> ChevronLeftIcon {}]]]
-        [:> Divider {}]
+         [IconButton {:onClick handleDrawerClose}
+          [ChevronLeftIcon {}]]]
+        [Divider {}]
         "hi"
         #_[:List "{mainListItems}"]
-        [:> Divider {}]
+        [Divider {}]
         #_[:List "{secondaryListItems}"]
         ]
        [:main {:className (gobj/get classes "content")}
         [:div {:className (gobj/get classes "appBarSpacer")}]
-        [:> Container {:maxWidth "lg" :className (gobj/get classes "container")}
-         [:> Grid {:container true :spacing 3}              ; "{/* Chart */}"
-          [:> Grid {:item true :xs 12 :md 8 :lg 9}
-           [:> Paper {:className fixedHeightPaper}
+        [Container {:maxWidth "lg" :className (gobj/get classes "container")}
+         [Grid {:container true :spacing 3}              ; "{/* Chart */}"
+          [Grid {:item true :xs 12 :md 8 :lg 9}
+           [Paper {:className fixedHeightPaper}
             "Chart" #_[:Chart]]]                            ;"{/* Recent Deposits */}"
-          [:> Grid {:item true :xs 12 :md 4 :lg 3}
-           [:> Paper {:className fixedHeightPaper}
+          [Grid {:item true :xs 12 :md 4 :lg 3}
+           [Paper {:className fixedHeightPaper}
             "Deposits" #_[:Deposits]]]                      ;"{/* Recent Orders */}"
-          [:> Grid {:item true :xs 12}
-           [:> Paper {:className (gobj/get classes "paper")}
+          [Grid {:item true :xs 12}
+           [Paper {:className (gobj/get classes "paper")}
             "Orders"
             #_[:Orders]]]]]
         #_[:MadeWithLove]]

@@ -1,8 +1,8 @@
 {:deps
  {crinkle                   {:mvn/version "2.0.0"}
   org.clojure/clojurescript {:mvn/version "1.10.439"}
-  hicada                    {:git/url "https://github.com/lynaghk/hicada.git"
-                             :sha     "880fb784ac7ca9eef9259007f4dd27b9dda9462f"}
+  hicada                    {:git/url "https://github.com/Breezeemr/hicada.git"
+                             :sha     "6244e6024a2e7af4ebd965193478217e5c2773f8"}
   thheller/shadow-cljs      {:mvn/version "2.8.40"}}
  :aliases
  {:cljs {:extra-deps {binaryage/devtools     {:mvn/version "0.9.7"}
