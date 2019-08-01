@@ -1,0 +1,21 @@
+;; shadow-cljs configuration
+{:source-paths ["src"]
+ :deps {:aliases [:cljs]}
+ ;; set an nrepl port for connection to a REPL.
+ :nrepl {:port 8777}
+ :builds {:app {:target     :browser
+                :output-dir "public/js/compiled"
+                :asset-path "/js/compiled"
+
+                :modules {:main
+                          {:entries [crnkl-todomvc.core]}}
+
+                :devtools
+                ;; before live-reloading any code call this function
+                {:before-load crnkl-todomvc.core/stop
+                 ;; after live-reloading finishes call this function
+                 :after-load  crnkl-todomvc.core/start
+                 ;; serve the public directory over http at port 8700
+                 :http-root   "public"
+                 :http-port   8700
+                 :preloads    [devtools.preload]}}}}

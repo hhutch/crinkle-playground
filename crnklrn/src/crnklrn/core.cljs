@@ -30,3 +30,9 @@
 
   )
 ;;
+
+
+;; todo mvc, hooks, use-reducer
+;; https://github.com/Day8/re-frame/tree/master/examples/todomvc
+
+;; https://kevinlynagh.com/notes/fast-cljs-react-templates/
